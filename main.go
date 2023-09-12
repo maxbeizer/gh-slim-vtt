@@ -38,6 +38,7 @@ func doIt(cCtx *cli.Context) error {
 
 	// Create a new scanner for the file
 	scanner := bufio.NewScanner(in)
+	// currentSpeaker := ""
 
 	// Read each line of the file
 	for scanner.Scan() {
