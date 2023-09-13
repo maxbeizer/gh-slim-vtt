@@ -6,40 +6,47 @@ import (
 
 func TestHandleLine(t *testing.T) {
 	tests := []struct {
-		name         string
-		input        string
-		hasSpeaker   bool
-		expectedLine string
+		name           string
+		line           string
+		currentSpeaker string
+		hasSpeaker     bool
+		expectedLine   string
 	}{
 		{
+			name:         "header",
+			line:         "WEBVTT",
+			hasSpeaker:   false,
+			expectedLine: "",
+		},
+		{
 			name:         "empty string",
-			input:        "",
+			line:         "",
 			hasSpeaker:   false,
 			expectedLine: "",
 		},
 		{
 			name:         "line number",
-			input:        "202",
+			line:         "202",
 			hasSpeaker:   false,
 			expectedLine: "",
 		},
 		{
 			name:         "time",
-			input:        "00:36:17.540 --> 00:36:38.369",
+			line:         "00:36:17.540 --> 00:36:38.369",
 			hasSpeaker:   false,
 			expectedLine: "",
 		},
 		{
 			name:         "with speaker",
-			input:        "@maxbeizer: some such nonsense",
-			hasSpeaker:   false,
-			expectedLine: "",
+			line:         "@maxbeizer: some such nonsense",
+			hasSpeaker:   true,
+			expectedLine: " some such nonsense",
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			speaker, result := HandleLine(tt.input)
+			speaker, result := HandleLine("", tt.line)
 			if (speaker != "" && !tt.hasSpeaker) || (speaker == "" && tt.hasSpeaker) {
 				t.Errorf("expected %t, but got %q", tt.hasSpeaker, speaker)
 			}
