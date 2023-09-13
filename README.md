@@ -20,11 +20,8 @@ gh slim-vtt ~/Downloads/GMT... | pbcopy
 
 ## Development
 
-This extension uses the base CLI token so you should not need any special auth.
-
 ```
 gh extension install .
-make build
 gh slim-vtt --help
 ```
 
