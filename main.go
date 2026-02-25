@@ -11,8 +11,9 @@ import (
 
 func main() {
 	app := &cli.App{
-		Name:  "slim",
-		Usage: "Slim down vtt files",
+		Name:      "gh slim-vtt",
+		Usage:     "Remove cruft from VTT files (Zoom and Microsoft Teams transcripts)",
+		ArgsUsage: "<path-to-vtt-file>",
 		Action: func(cCtx *cli.Context) error {
 			return doIt(cCtx)
 		},
@@ -26,6 +27,9 @@ func main() {
 func doIt(cCtx *cli.Context) error {
 	// open the file at the path given
 	path := cCtx.Args().First()
+	if path == "" {
+		return cli.ShowAppHelp(cCtx)
+	}
 	in, err := os.Open(path)
 	if err != nil {
 		return fmt.Errorf("could not open file: %s", path)
