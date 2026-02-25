@@ -1,6 +1,6 @@
 # Slim VTT
 
-A [gh cli](https://cli.github.com/) extension to remove cruft from vtt files (like Zoom transcripts)
+A [gh cli](https://cli.github.com/) extension to remove cruft from vtt files (like Zoom and Microsoft Teams transcripts)
 
 ## Installation
 
@@ -21,8 +21,11 @@ gh slim-vtt ~/Downloads/GMT... | pbcopy
 ## Development
 
 ```
-gh extension install .
-gh slim-vtt --help
+make help          # list all available targets
+make build         # compile the binary
+make test          # run unit tests
+make ci            # build + vet + test-race
+make install-local # install extension from current checkout
 ```
 
 Made with 💖 (and a little bit of 😩) by @maxbeizer
